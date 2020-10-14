@@ -1,5 +1,16 @@
 <?php
+
+/*
+ * This file is part of the xin6841414/weather.
+ *
+ * (c) xin6841414 <xin6841414@126.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Xin6841414\Weather\Tests;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
@@ -13,9 +24,8 @@ use Xin6841414\Weather\Weather;
  * Created by PhpStorm.
  * User: xin6841414
  * Date: 10-9 009
- * Time: 10:21
+ * Time: 10:21.
  */
-
 class WeatherTest extends Testcase
 {
     public function testGetWeather()
@@ -32,20 +42,20 @@ class WeatherTest extends Testcase
                 'city' => '深圳',
                 'output' => 'json',
                 'extensions' => 'base',
-            ]
+            ],
         ])->andReturn($response);
         $w = \Mockery::mock(Weather::class, ['mock-key'])->makePartial();
         $w->allows()->getHttpClient()->andReturn($client);
         $this->assertSame(['success' => true], $w->getWeather('深圳'));
 
-        $response =  new Response(200, [], '<hello>content</hello>');
+        $response = new Response(200, [], '<hello>content</hello>');
         $client = \Mockery::mock(Client::class);
         $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo', [
             'query' => [
                 'key' => 'mock-key',
                 'city' => '深圳',
                 'extensions' => 'all',
-                'output' => 'xml'
+                'output' => 'xml',
             ],
         ])->andReturn($response);
 
@@ -90,7 +100,7 @@ class WeatherTest extends Testcase
         $this->expectExceptionMessage('Invalid response format: array');
 
         // 因为支持的格式为 xml/json , 所以传入 array 会抛出异常
-        $w->getWeather('深圳','base', 'array');
+        $w->getWeather('深圳', 'base', 'array');
         // 如果没有抛出异常， 就会运行到这行，标记当前测试没成功
         $this->fail('Failed to assert getWeather throw exception with invalid argument.');
     }

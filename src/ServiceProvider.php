@@ -1,13 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xin6841414
- * Date: 10-10 010
- * Time: 17:01
+
+/*
+ * This file is part of the xin6841414/weather.
+ *
+ * (c) xin6841414 <xin6841414@126.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Xin6841414\Weather;
-
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -15,7 +17,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(Weather::class, function(){
+        $this->app->singleton(Weather::class, function () {
             return new Weather(config('services.weather.key'));
         });
         $this->app->alias(Weather::class, 'weather');
