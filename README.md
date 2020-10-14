@@ -2,6 +2,8 @@
 
 <p align="center"> 基于高德开放平台的php天气信息组件.</p>
 
+[![Build Status](https://travis-ci.org/xin6841414/Weather.svg?branch=master)](https://travis-ci.org/xin6841414/Weather)
+
 [高德开放平台](https://lbs.amap.com/dev/id/newuser)
 
 ## 安装
